@@ -1,0 +1,48 @@
+<html>
+    <head>
+        <title>Rolling a Pair of Dice</title>
+        <style>
+            .gridcell {
+                padding-bottom: 12px;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Results</h1>
+
+        <div id = "DieDiv">           
+        </div>
+
+        <div id ="GraphBoxes">            
+        </div>
+
+        <script>
+            function getRndInteger(min, max) {
+                return Math.floor(Math.random() * (max - min)) + min;
+            }
+            var count = [0,0,0,0,0,0,0,0,0,0,0];
+            for (var i = 1; i <=1000; i++) {
+                var Die1 = getRndInteger(1,7);
+                var die2 = getRndInteger(1,7);    
+                var totalRoll = Die1 + die2;
+                count[totalRoll-2]++;               
+            }
+            var DieDiv = document.getElementById("DieDiv");
+            for(var i = 1; i <= 11; i++) {
+                var newdiv = document.createElement("div");
+                newdiv.textContent = ((i+1) + ": " + count[i-1]);
+                newdiv.className = "gridcell";
+                DieDiv.appendChild(newdiv);
+            }
+            var GraphBoxes = document.getElementById("GraphBoxes");            
+            for (var k = 1; k <=11; k++) {
+                var newboxes = document.createElement("div");
+                newboxes.setAttribute("style", "background: grey; width: " +count[k-1] + "px; height: 20px; outline: 1px solid lime; position: relative; left: 50px; padding-bottom: 10px; bottom: 338px;");
+                GraphBoxes.appendChild(newboxes);
+            }
+        </script>
+
+
+        
+    </body>
+</html>
